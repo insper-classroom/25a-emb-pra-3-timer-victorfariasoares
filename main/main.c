@@ -28,7 +28,7 @@
      if (esperando_subida) {
          datetime_t now;
          rtc_get_datetime(&now);
-         printf("%s - Falha\n", now.hour, now.min, now.sec);
+         printf("%02d:%02d:%02d - Falha\n", now.hour, now.min, now.sec);
          esperando_subida = false;
      }
      return 0; // Não repete 
@@ -99,14 +99,14 @@
                  descida = 0;
                  int diferenca = absolute_time_diff_us(inicio, fim);
                  double distancia = (diferenca * 0.0343) / 2.0;
-                 datetime_t t = {0};
+                 datetime_t t2 = {0};
                  rtc_get_datetime(&t);
          
                  char datetime_buf[256];
                  char *datetime_str = &datetime_buf[0];
-                 datetime_to_str(datetime_str, sizeof(datetime_buf), &t);
+                 datetime_to_str(datetime_str, sizeof(datetime_buf), &t2);
                  // printf("Alarm Fired At %s\n", datetime_str);
-                 rtc_get_datetime(&t);
+                 rtc_get_datetime(&t2);
                  printf("%s - %.2f cm\n", datetime_str, distancia);
              }
          }
